@@ -15,9 +15,6 @@
       plover-flake,
       ...
     }:
-    let
-      pkgs = import nixpkgs { system = "x86_64-linux"; };
-    in
     {
       nixosConfigurations.test = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -29,12 +26,16 @@
             networking.hostName = "test";
             users.users.test = {
               isNormalUser = true;
-              password = "";
+              initialPassword = "test";
               extraGroups = [
                 "dialout"
                 "input"
+                "wheel" # sudo
               ];
             };
+
+            services.xserver.enable = true;
+            services.xserver.desktopManager.xfce.enable = true;
           }
 
           home-manager.nixosModules.home-manager
