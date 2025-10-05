@@ -46,9 +46,10 @@
               {
                 imports = [ inputs.plover-flake.homeManagerModules.plover ];
                 home.stateVersion = "25.11";
+                programs.vim.enable = true;
                 programs.plover = {
                   enable = true;
-                  package = plover-flake.packages.${pkgs.system}.plover-full;
+                  package = plover-flake.packages.${pkgs.system}.plover;
                   settings = {
                     "Plugins" = {
                       enabled_extensions = [
